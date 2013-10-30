@@ -32,7 +32,6 @@ class Jsmin4lrn
 
 	def write_js_to_file js_to_write, file_path=''
 	    file_path = @options.js_path unless @options.js_path.nil?
-			    	
 	end
 
 	def remove_comments(script='')

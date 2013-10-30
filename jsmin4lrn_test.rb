@@ -65,9 +65,9 @@ class Jsmin4lrnTest < Test::Unit::TestCase
 	    assert_match /[^\n]/, jsminifier.puts_in_one_line(mock_script)
 	end
 
-	def test_minify
+	# def test_minify
 	    
-	end
+	# end
 
 end
 
