@@ -1,4 +1,4 @@
-jsmin4lrn
+jsmin4lrn - Pre-alpha
 =========
 
 Very Basic Javascript minifier written in Ruby 
