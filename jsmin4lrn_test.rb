@@ -8,6 +8,7 @@ class Jsmin4lrn; attr_accessor :file_content; public :write_js_to_file, :read_js
 
 class Jsmin4lrnTest < Test::Unit::TestCase
 
+
 	def mock_script
 	    "
 	    /*
@@ -28,7 +29,7 @@ class Jsmin4lrnTest < Test::Unit::TestCase
 
 	def jsminifier
 	    jsminify = Jsmin4lrn.new do |conf|
-	    	conf.js_dir = 'js'
+	    	conf.js_dir  = 'js'
 	    	conf
 	    end
 	    jsminify
@@ -45,7 +46,7 @@ class Jsmin4lrnTest < Test::Unit::TestCase
 	def test_write_back_to_js_file
 		file_path 	= File.dirname(__FILE__).+"/js/exemple.js"
 		js_to_write = mock_script
-
+		
 		jsminifier.write_js_to_file js_to_write, file_path
 		# Now see if it was written...
 		content_js_file_now = File.read file_path
@@ -64,10 +65,6 @@ class Jsmin4lrnTest < Test::Unit::TestCase
 	def test_puts_in_one_line
 	    assert_match /[^\n]/, jsminifier.puts_in_one_line(mock_script)
 	end
-
-	# def test_minify
-	    
-	# end
 
 end
 
