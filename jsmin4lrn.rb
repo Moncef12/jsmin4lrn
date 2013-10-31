@@ -3,14 +3,12 @@ class Jsmin4lrn
 	attr_reader :options
 
 	class Jsmin4lrn_config 
-		attr_reader :js_dir
-		attr_writer :js_dir	
+		attr_accessor :js_dir, :js_path
 	end
 	
 	def initialize
 		@options = yield Jsmin4lrn_config.new
 	end
-
 
 
 	private
@@ -29,9 +27,14 @@ class Jsmin4lrn
 	    	raise "File given doesn't exists"
 	    end
 	end
-
-	def write_js_to_file js_to_write, file_path=''
-	    file_path = @options.js_path unless @options.js_path.nil?
+	
+	def write_js_to_file(js_to_write, file_path='')
+		unless js_to_write.empty?
+		    file_path = @options.js_path unless @options.js_path.nil?
+		    f = File.open(file_path, 'w')
+		    f.write(js_to_write)
+		    f.close
+		end
 	end
 
 	def remove_comments(script='')
