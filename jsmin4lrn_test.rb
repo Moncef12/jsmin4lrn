@@ -3,7 +3,7 @@ require './jsmin4lrn'
 
 
 # Reopen class to enable testing private methods.
-class Jsmin4lrn; attr_accessor :file_content; public :write_js_to_file, :read_js_file, :remove_multiple_lines_comments, :puts_in_one_line, :remove_comments end;
+class Jsmin4lrn; attr_accessor :file_content; public :get_all_variable, :write_js_to_file, :read_js_file, :remove_multiple_lines_comments, :puts_in_one_line, :remove_comments end;
 
 
 class Jsmin4lrnTest < Test::Unit::TestCase
@@ -20,10 +20,15 @@ class Jsmin4lrnTest < Test::Unit::TestCase
 					// return a function
 					// another line
 					// // another line
-					return function(){3+4}
+					var a, b;
+					r = 4;
+					b = 9
+					var h = 4;
+					return function(){r+b}
 				}
 				// etc .....
 				// etc ..... ?.?./!!!! wow
+
 		"
 	end
 
@@ -46,7 +51,7 @@ class Jsmin4lrnTest < Test::Unit::TestCase
 	def test_write_back_to_js_file
 		file_path 	= File.dirname(__FILE__).+"/js/exemple.js"
 		js_to_write = mock_script
-		
+
 		jsminifier.write_js_to_file js_to_write, file_path
 		# Now see if it was written...
 		content_js_file_now = File.read file_path
@@ -64,6 +69,10 @@ class Jsmin4lrnTest < Test::Unit::TestCase
 
 	def test_puts_in_one_line
 	    assert_match /[^\n]/, jsminifier.puts_in_one_line(mock_script)
+	end
+
+	def test_get_all_variable_that_exists
+	    assert_equal 5, jsminifier.get_all_variable.length
 	end
 
 end

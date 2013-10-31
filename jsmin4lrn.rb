@@ -27,7 +27,7 @@ class Jsmin4lrn
 	    	raise "File given doesn't exists"
 	    end
 	end
-	
+
 	def write_js_to_file(js_to_write, file_path='')
 		unless js_to_write.empty?
 		    file_path = @options.js_path unless @options.js_path.nil?
@@ -55,5 +55,11 @@ class Jsmin4lrn
 	def puts_in_one_line(script='')
 		@file_content = script unless script.empty?
 	    return @file_content.gsub(/\n/, "")
+	end
+
+	def get_all_variable(script='')
+		@file_content = script unless script.empty?
+	    # To implement...
+	    return Array.new
 	end
 end
