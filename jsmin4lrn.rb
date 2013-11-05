@@ -57,9 +57,22 @@ class Jsmin4lrn
 	    return @file_content.gsub(/\n/, "")
 	end
 
-	def get_all_variable(script='')
+	def get_all_variables(script='')
+		vars = Array.new
+		patterns = [
+			# for => var varanme 
+			/var\s+(\w*)\s*[=;,]?/, 
+			# for => varname;
+			/var.*,\s*(\w+)\s*[=]?.*\s*[;,]/,
+			# for => , varname, 
+			/,\s*(\w+)\s*(=.*)?\s*,/ 
+		]
 		@file_content = script unless script.empty?
-	    # To implement...
-	    return Array.new
+		patterns.each do |p| 
+			@file_content.scan(p) do |m|
+				vars << m.first unless vars.include? m.first  
+			end 
+		end
+	    vars
 	end
 end
